@@ -1,0 +1,162 @@
+<div class="slider">
+  <ul class="slides">
+    <li>
+      <img class="center" style="filter:brightness(50%); width:600px;"
+        src="https://firebasestorage.googleapis.com/v0/b/portifolio-ceia.appspot.com/o/imagens%2FCopy%20of%20CEIA_fundobranco_Prancheta%201%20c%C3%B3pia%203.png?alt=media&token=53bf52c3-7ecf-433e-98f4-ea596730a52e">
+      <!-- random image -->
+      <div class="caption center-align">
+        <h3>CEIA</h3>
+        <h5 class="light grey-text text-lighten-3">Centro de Excelência em Inteligênci Artificial.</h5>
+        <a href="http://centrodeia.org" target="_blank"
+          class="btn waves-effect white grey-text darken-text-2">Ver</a>
+      </div>
+    </li>
+    <!--<li>
+      <img style="filter:brightness(70%)"
+        src="http://portalideias.com.br/web-files/uploads/post/c975ae4485a937f5fe52570b2dc87a72.png">
+      
+      <div class="caption left-align">
+        <h3>Projeto</h3>
+        <h5 class="light grey-text text-lighten-3">Ajuda para seus projetos.</h5>
+        <a href="http://apoema.inf.ufg.br/servicosinterno.php" target="_blank"
+          class="btn waves-effect white grey-text darken-text-2">Ver</a>
+      </div>
+    </li>
+    <li>
+      <img style="filter:brightness(70%)"
+        src="https://fast-notas-blog.s3.amazonaws.com/wp-content/uploads/2017/05/como-abrir-uma-empresa.jpg">
+      
+      <div class="caption right-align">
+        <h3>Empresa</h3>
+        <h5 class="light grey-text text-lighten-3">Ajuda para a sua empresa.</h5>
+        <a href="http://apoema.inf.ufg.br/servicosempresa.php" target="_blank"
+          class="btn waves-effect white grey-text darken-text-2">Ver</a>
+      </div>
+    </li>-->
+  </ul>
+</div>
+<br>
+
+<div class="div-btns">
+  <a (click)="filterArea('')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">all_inclusive</i>Todos</a>
+  <!--<a (click)="filterArea('Agronegócio')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">nature_people</i>Agronegócio</a>-->
+  <a (click)="filterArea('Educação')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">school</i>Educação</a>
+  <a (click)="filterArea('Robótica')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">build</i>Robótica</a>
+  <a (click)="filterArea('Segurança Pública')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">http</i>Segurança Pública</a>
+  <a (click)="filterArea('Gestão Empresarial')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">autorenew</i>Gestão Empresarial</a>
+  <a (click)="filterArea('Gestão Pública')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">brightness_5</i>Gestão Pública</a>
+  <a (click)="filterArea('Saúde')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">favorite</i>Saúde</a>
+  <a (click)="filterArea('Distribuição de Energia')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">group</i>Distribuição de Energia</a>
+  <a (click)="filterArea('Outros')" class="waves-effect waves-light btn orange darken-4"><i
+      class="material-icons left">dehaze</i>Outros</a>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="input-field col s12 m4">
+      <select [(ngModel)]="status">
+        <option value="" disabled selected>Escolha a sua opção</option>
+        <option value="">Todos</option>
+        <option value="Em andamento">Em andamento</option>
+        <option value="Concluído">Concluído</option>
+        <!--<option value="Suspenso">Suspenso</option>-->
+      </select>
+      <label>Status</label>
+    </div>
+    <div class="input-field col s12 m4">
+      <select [(ngModel)]="finalidade">
+        <option value="" disabled selected>Escolha a sua opção</option>
+        <option value="">Todos</option>
+        <option value="Pesquisa">Pesquisa</option>
+        <option value="Extensão">Extensão</option>
+        <option value="Desenvolvimento Institucional">Desenvolvimento Institucional</option>
+        <option value="Desenvolvimento Organizacional">Desenvolvimento Organizacional</option>
+      </select>
+      <label>Finalidade</label>
+    </div>
+    <form class="col s12 m4">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input [(ngModel)]="titulo" id="first_name" class="validate" type="text" name="titulo">
+          <label for="first_name">Busque por título, equipe ou aporte</label>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="divider grey darken-2"></div>
+<div class="section">
+  <div class="container">
+    <h4 class="orange-text text-darken-2"><b>Projetos</b></h4>
+    <div class="divider cyan darken-2"></div>
+    <br>
+    <ul class="collapsible popout">
+      <li
+        *ngFor="let item of projetos | async | filterBy: ['categorizacao.status']: status | filterBy: ['categorizacao.area']: area | filterBy: ['descricao', 'titulo', 'categorizacao.membros', 'categorizacao.coordenador.nome', 'categorizacao.financiamento']: titulo | filterBy: ['categorizacao.finalidade']: finalidade">
+        <div class="collapsible-header">{{item.titulo}}</div>
+        <div class="grey lighten-4 collapsible-body">
+          <div class="card">
+            <div class="card-content gray-text">
+              <img *ngIf="item.img" style="max-height:200px" src="{{item.img}}" alt=""
+                class="center circle responsive-img">
+              <p><b class="orange-text text-accent-4">Descrição:</b> {{item.descricao}}</p>
+              <p><b class="orange-text text-accent-4">URL do Projeto: </b><a target="_blank"
+                  href="{{item.url}}">Acesse</a></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content gray-text">
+              <span align="center" class="card-title">Categorização do Projeto</span>
+              <div class="divider"></div>
+              <p><b class="orange-text text-accent-4">Área:</b> {{item.categorizacao?.area}}</p>
+              <p><b class="orange-text text-accent-4">Status:</b> {{item.categorizacao?.status}}</p>
+              <p><b class="orange-text text-accent-4">Coordenador:</b> {{item.categorizacao?.coordenador.nome}}</p>
+              <p><b class="orange-text text-accent-4">Contato Coordenador:</b>
+                {{item.categorizacao?.coordenador.telefone}}
+                - {{item.categorizacao?.coordenador.email}}</p>
+              <ul class="collection">
+                <li class="collection-header orange-text text-accent-4">
+                  <p><b>Equipe:</b></p>
+                </li>
+                <li class="collection-item" *ngFor="let membro of item.membros">{{membro}}</li>
+              </ul>
+              <p><b class="orange-text text-accent-4">Finalidade:</b> {{item.categorizacao?.finalidade}}</p>
+              <p><b class="orange-text text-accent-4">Financiamento:</b> {{item.categorizacao?.financiamento}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content gray-text">
+              <span align="center" class="card-title">Contexto de Aplicação</span>
+              <div class="divider"></div>
+              <ul class="collection">
+                <li class="collection-header orange-text text-accent-4">
+                  <p><b>Contexto Corporativo:</b></p>
+                </li>
+                <li class="collection-item" *ngFor="let contexto of item.contexto?.contexto">{{contexto}}</li>
+              </ul>
+              <p><b class="orange-text text-accent-4">Métodos e Ferramentas:</b> {{item.contexto?.quesitos}}
+              </p>
+              <ul class="collection">
+                <li class="collection-header orange-text text-accent-4">
+                  <p><b>Contratação:</b></p>
+                </li>
+                <li class="collection-item" *ngFor="let contrato of item.contexto?.contratacao">{{contrato}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>

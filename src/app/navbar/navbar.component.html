@@ -1,0 +1,29 @@
+<div class="navbar-fixed">
+   <nav class="orange darken-2">
+    
+    <div class="container nav-wrapper orange darken-2">
+      <img style="width: 200px; top: -200px;" 
+    src="https://firebasestorage.googleapis.com/v0/b/portifolio-ceia.appspot.com/o/imagens%2FCEIA_transparente.png?alt=media&token=3910c53e-9c53-4496-8c07-e89fff4fe5b7">
+   
+      <!--<a href="#!" class="brand-logo">Portfólio de projetos de pesquisa, desenvolvimento e inovação</a>-->
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li routerLinkActive="active"><a routerLink="/inicio">Início</a></li>
+        <li routerLinkActive="active"><a routerLink="/sobre">Sobre</a></li>
+        <li routerLinkActive="active"><a routerLink="/contato">Contato</a></li>
+        <li *ngIf="!isAdmin" routerLinkActive="active"><a routerLink="/login">Login</a></li>
+        <li *ngIf="isAdmin" routerLinkActive="active"><a routerLink="/admin">Administrador</a></li>
+        <li *ngIf="isAdmin" routerLinkActive="active"><a class="waves-effect waves-light btn red" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<ul class="sidenav" id="mobile-demo">
+  <li><a routerLink="/inicio">Início</a></li>
+  <li><a routerLink="/sobre">Sobre</a></li>
+  <li><a routerLink="/contato">Contato</a></li>
+  <li *ngIf="!isAdmin" routerLinkActive="active"><a routerLink="/login">Login</a></li>
+  <li *ngIf="isAdmin" routerLinkActive="active"><a routerLink="/admin">Administrador</a></li>
+  <li *ngIf="isAdmin" routerLinkActive="active"><a class="waves-effect waves-light btn red" (click)="logout()">Logout</a></li>
+</ul>
